@@ -145,6 +145,9 @@ def register():
                           )
         db.session.add(teacher)
         db.session.commit()
+        WEEK_DAYS = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']
+        for week_day in WEEK_DAYS:
+            pass
         return redirect('login')
     return render_template('register.html', session=session, form=form, error=False)
 
