@@ -35,6 +35,7 @@ class Teacher(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     full_name = db.Column(db.String(80), unique=False, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    accepted = db.Column(db.Boolean, unique=False)
 
     def __repr__(self):
         return '<Teacher {} {} {}>'.format(
@@ -60,6 +61,14 @@ class LoginForm(FlaskForm):
     username = StringField('Логин', validators=[DataRequired()], id='form_string_field')
     password = PasswordField('Пароль', validators=[DataRequired()], id='form_string_field')
     submit = SubmitField('Войти', id='button')
+
+
+class RegisterForm(FlaskForm):
+    username = StringField('Логин', validators=[DataRequired()], id='form_string_field')
+    password = PasswordField('Пароль', validators=[DataRequired()], id='form_string_field')
+    repeat_password = PasswordField('Повторите пароль', validators=[DataRequired()], id='form_string_field')
+    full_name = StringField('ФИО (полностью)', validators=[DataRequired()], id='form_string_field')
+    submit = SubmitField('Зарегестрироваться', id='button')
 
 
 @app.route('/')
@@ -121,6 +130,23 @@ def teachers():
 @app.route('/timetable')
 def timetable():
     return render_template('timetable.html', session=session)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        if form.password.data != form.repeat_password.data:
+            return render_template('register.html', session=session, form=form, error=True)
+        teacher = Teacher(username=form.username.data,
+                          full_name=form.full_name.data,
+                          password=form.password.data,
+                          accepted=False
+                          )
+        db.session.add(teacher)
+        db.session.commit()
+        return redirect('login')
+    return render_template('register.html', session=session, form=form, error=False)
 
 
 @app.route('/profile')
