@@ -123,6 +123,15 @@ def timetable():
     return render_template('timetable.html', session=session)
 
 
+@app.route('/profile')
+def profile():
+    if 'username' not in session:
+        return redirect('/index')
+    query = Teacher.query.filter_by(username=session['username']).first()
+    full_name = query.full_name
+    return render_template('profile.html', session=session, full_name=full_name)
+
+
 @app.route('/logout')
 def logout():
     session.pop('username', 0)
