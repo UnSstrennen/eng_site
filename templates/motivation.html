@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/bootstrap.min.css" >
-    <link rel="stylesheet" href="../TEACHERS.css" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/TEACHERS.css') }}" >
 </head>
 <body style='background-color:#d9d6e7;'>
 
@@ -106,10 +106,10 @@
    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 <div class="carousel-inner">
   <div class="carousel-item active">
-    <img src="../images/bridge.jpg" class="d-block w-100" alt="..." width="300" height="500">
+    <img src="{{ url_for('static', filename='images/bridge.jpg') }}" class="d-block w-100" alt="..." width="300" height="500">
   </div>
   <div class="carousel-item">
-    <img src="../images/gbgb.jpg" class="d-block w-100" alt="..." width="300" height="500">
+    <img src="{{ url_for('static', filename='images/gbgb.jpg') }}" class="d-block w-100" alt="..." width="300" height="500">
   </div>
 
 </div>
@@ -153,35 +153,35 @@
                английского языка в вариацию американского. Полностью сформировался американский английский язык
                на протяжении 400 лет после его внедрения в Америке.</p>
                <div class="container">
-                 <img src="../images/emire.jpg" class="d-block w-100" alt="..." width="300" height="500">
+                 <img src="{{ url_for('static', filename='images/emire.jpg') }}" class="d-block w-100" alt="..." width="300" height="500">
                </div>
            <p> <strong>Великобритания.</strong> Данную страну называют официально Соединенным Королевством Великобритании и Северной Ирландии.
               Страна официально состоит из 3-х: Шотландии, Северной Ирландии, Уэльса.
                На территории Шотландии и Северной Ирландии государственным языком признан английский,
                а в Уэльсе национальный язык — валлийский.</p>
               <div class="container">
-   <img src="../images/velikobrit.jpg" class="d-block w-100" alt="..." width="300" height="500">
+   <img src="{{ url_for('static', filename='images/velikobrit.jpg') }}" class="d-block w-100" alt="..." width="300" height="500">
  </div>
            <p><strong>Канада.</strong> Сегодня в Канаде 2 официально признанных конституцией языка — английский и французский.
              На английском языке разговаривает более 67 % населения данной страны. </p>
 <div class="container">
-<img src="../images/kanada.jpg" class="d-block w-100" alt="..." width="300" height="500">
+<img src="{{ url_for('static', filename='images/kanada.jpg') }}" class="d-block w-100" alt="..." width="300" height="500">
 </div>
            <p><strong>Австралийский Союз.</strong> В Австралии официальным языком признан английский,
               который благодаря формированию особого австралийского диалекта был назван страйном. </p>
               <div class="container">
-              <img src="../images/Australia.JPG" class="d-block w-100" alt="..." width="300" height="500">
+              <img src="{{ url_for('static', filename='images/Australia.JPG') }}" class="d-block w-100" alt="..." width="300" height="500">
               </div>
           <p> <strong>Нигерия.</strong> Федеративная республика Нигерия находится в Западной Африке и является самым
             крупным по населению государством на африканском континенте. В Нигерии английский язык был введен в годы
              колониального господства Великобритании. </p>
              <div class="container">
-             <img src="../images/nigeria.jpg" class="d-block w-100" alt="..." width="300" height="500">
+             <img src="{{ url_for('static', filename='images/nigeria.jpg') }}" class="d-block w-100" alt="..." width="300" height="500">
              </div>
            <p><strong>Ирландия.</strong> В Ирландию, как и во многие страны мира, английский язык «привезли» англичане, которые покорили остров и руководили им почти 800 лет.
 </p>
           <div class="container">
-              <img src="../images/irlandia.jpg" class="d-block w-100" alt="..." width="300" height="500">
+              <img src="{{ url_for('static', filename='images/irlandia.jpg') }}" class="d-block w-100" alt="..." width="300" height="500">
             </div>
             <p>Ни для кого не секрет, что английский язык имеет несколько вариаций и диалектов.
                Самые распространенные вариации языка: Новозеландский; Австралийский; Американский; Английский; Канадский.
@@ -209,9 +209,7 @@
 </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <script src="../js/popper.min.js"></script>
-
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/bootstrap.min.css" >
-    <link rel="stylesheet" href="../my.css" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my.css') }}" >
 </head>
 <body style='background-color:#d9d6e7;'>
 
@@ -39,7 +39,7 @@
       <h2 align="center" style="padding:20px;">САМЫЕ РАСПРОСТРАНЁННЫЕ ИДИОМЫ</h2>
       <h5><em>Изучая английский язык, со временем возникает вопрос пополнения словарного запаса устойчивыми выражениями
          - идиомами английского языка. Здесь вы найдете сборник английских идиом с русским переводом.</em></h5>
-      <img src="../images/sky.jpg" style="width:400px; height:200px;">
+      <img src="{{ url_for('static', filename='images/sky.jpg') }}" style="width:400px; height:200px;">
     <div class="row">
       <table class="table">
     <thead class="bg-secondary">

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css" >
-    <link rel="stylesheet" href="../TEACHERS.css" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/TEACHERS.css') }}" >
 </head>
 <body style='background-color:#d9d6e7;'>
 
@@ -21,10 +21,10 @@
 <div class="collapse navbar-collapse" id="navbarNav">
  <ul class="navbar-nav">
    <li class="nav-item active">
-     <a class="nav-link" href="index.html">Главная</a>
+     <a class="nav-link" href="{{ url_for('static', filename='images/index.jpg') }}">Главная</a>
    </li>
    <li class="nav-item">
-     <a class="nav-link" href="teachers.html">Учителя <span class="sr-only">(current)</span></a>
+     <a class="nav-link" href="{{ url_for('static', filename='images/teachers.jpg') }}">Учителя <span class="sr-only">(current)</span></a>
    </li>
    <li class="nav-item">
      <a class="nav-link" href="advices.html">Советы</a>
@@ -42,7 +42,7 @@
 
       <div class="wp-block inverse no-margin">
         <div class="figure">
-          <img src="../images/no.jpg" style="width:300px; height:400px;">
+          <img src="{{ url_for('static', filename='images/no.jpg') }}" style="width:300px; height:400px;">
 
         </div>
         <h2 class="title">Арефьева Ирина Геннадьевна</h2>
@@ -54,7 +54,7 @@
      <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="wp-block inverse no-margin">
         <div class="figure">
-          <img src="../images/no.jpg" style="width:300px; height:400px;">
+          <img src="{{ url_for('static', filename='images/no.jpg') }}" style="width:300px; height:400px;">
           <div class="wp-block-info-over left">
           </div>
         </div>
@@ -69,7 +69,7 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="wp-block inverse no-margin">
         <div class="figure">
-          <img src="../images/no.jpg" style="width:300px; height:400px;">
+          <img src="{{ url_for('static', filename='images/no.jpg') }}" style="width:300px; height:400px;">
           <div class="wp-block-info-over left">
           </div>
         </div>
@@ -87,7 +87,7 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="wp-block inverse no-margin">
         <div class="figure">
-          <img src="../images/no.jpg" style="width:300px; height:400px;">
+          <img src="{{ url_for('static', filename='images/no.jpg') }}" style="width:300px; height:400px;">
           <div class="wp-block-info-over left">
           </div>
         </div>
@@ -102,7 +102,7 @@
      <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="wp-block inverse no-margin">
         <div class="figure">
-          <img src="../images/fokin.jpg" style="width:300px; height:400px;">
+          <img src="{{ url_for('static', filename='images/fokin.jpg') }}" style="width:300px; height:400px;">
           <div class="wp-block-info-over left">
           </div>
         </div>
@@ -119,7 +119,7 @@
 </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>

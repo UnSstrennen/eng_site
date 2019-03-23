@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/bootstrap.min.css" >
-    <link rel="stylesheet" href="../my.css" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my.css') }}" >
 </head>
 <body style='background-color:#d9d6e7;'>
 
@@ -42,10 +42,10 @@
      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="../images/london.jpg" class="d-block w-100" alt="..." width="450" height="550">
+      <img src="{{ url_for('static', filename='images/london.jpg') }}" class="d-block w-100" alt="..." width="450" height="550">
     </div>
     <div class="carousel-item">
-      <img src="../images/gb2.jpg" class="d-block w-100" alt="..." width="450" height="550">
+      <img src="{{ url_for('static', filename='images/gb2.jpg') }}" class="d-block w-100" alt="..." width="450" height="550">
     </div>
 
   </div>
@@ -65,7 +65,7 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="text-center">
-         <img class="rounded-circle img-fluid" style="width:200px; height:200px;"  src="../images/teachers.jpg">
+         <img class="rounded-circle img-fluid" style="width:200px; height:200px;"  src="{{ url_for('static', filename='images/teachers.jpg') }}">
          <h2>Учительский состав</h2>
  	     </div>
         <p>Преподаватели кафедры английского языка предуниверситетского лицея 1523</p>
@@ -73,7 +73,7 @@
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <div class="text-center">
-         <img class="rounded-circle img-fluid" style="width:200px; height:200px;" src="../images/advices.jpg">
+         <img class="rounded-circle img-fluid" style="width:200px; height:200px;" src="{{ url_for('static', filename='images/advices.jpg') }}">
          <h2>Советы учителей</h2>
  	  </div>
         <p>Советы наших учителей для изучения углубленной школьной программы</p>
@@ -81,7 +81,7 @@
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <div class="text-center">
-         <img class="rounded-circle img-fluid" style="width:200px; height:200px;"  src="../images/raspisanie.jpg">
+         <img class="rounded-circle img-fluid" style="width:200px; height:200px;"  src="{{ url_for('static', filename='images/raspisanie.jpg') }}">
          <h2>Расписание</h2>
  	     </div>
         <p>Расписание учителей в классах 8-11. Действует с 9 января</p>
@@ -100,7 +100,7 @@
       <div class="lib-panel">
         <div class="row box-shadow">
           <div class="col-md-6">
-            <img class="lib-img-show" src="../images/dict2.jpg" style="width: 250px; height:265px;">
+            <img class="lib-img-show" src="{{ url_for('static', filename='images/dict2.jpg') }}" style="width: 250px; height:265px;">
           </div>
           <div class="col-md-6">
             <div class="lib-row lib-header">
@@ -118,7 +118,7 @@
       <div class="lib-panel">
         <div class="row box-shadow">
           <div class="col-md-6">
-            <img class="lib-img-show" src="../images/irregularv.jpg" style="width: 250px; height:265px;">
+            <img class="lib-img-show" src="{{ url_for('static', filename='images/irregularv.jpg') }}" style="width: 250px; height:265px;">
           </div>
           <div class="col-md-6">
             <div class="lib-row lib-header">
@@ -137,7 +137,7 @@
       <div class="lib-panel">
         <div class="row box-shadow">
           <div class="col-md-6">
-            <img class="lib-img-show" src="../images/idioma.png" style="width: 250px; height:265px;">
+            <img class="lib-img-show" src="{{ url_for('static', filename='images/idioma.png') }}" style="width: 250px; height:265px;">
           </div>
           <div class="col-md-6">
             <div class="lib-row lib-header">
@@ -156,7 +156,7 @@
       <div class="lib-panel">
         <div class="row box-shadow">
           <div class="col-md-6">
-            <img class="lib-img-show" src="../images/motivation.jpg" style="width: 250px; height:265px;">
+            <img class="lib-img-show" src="{{ url_for('static', filename='images/motivation.jpg') }}" style="width: 250px; height:265px;">
           </div>
           <div class="col-md-6">
             <div class="lib-row lib-header">
@@ -176,7 +176,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/bootstrap.min.css" >
-    <link rel="stylesheet" href="../TEACHERS.css" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/TEACHERS.css') }}" >
 </head>
 <body style='background-color:#d9d6e7;'>
 
@@ -41,7 +41,7 @@
     <div class="blog-post">
 
 
-      <p style:"text-indent=20px;"
+      <p style:"text-indent=20px;
    }>Изучение английских неправильных глаголов начинается еще на ранних этапах обучения английскому языку.
          Понемногу, по 10-20 слов, мы расширяем свою коллекцию irregular verbs до более серьезного уровня.
          И уже первые 50 самых распространенных глаголов охватывают 87%
@@ -288,7 +288,7 @@
 
 </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>
