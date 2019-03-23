@@ -156,8 +156,8 @@ def register():
 def profile():
     if 'username' not in session:
         return redirect('/index')
-    if session['username'] != 'admin':
-        return redirect('/index')
+    if session['username'] == 'admin':
+        return redirect('/admin')
     query = Teacher.query.filter_by(username=session['username']).first()
     full_name = query.full_name
     return render_template('profile.html', session=session, full_name=full_name)
