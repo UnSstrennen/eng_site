@@ -156,6 +156,8 @@ def register():
 def profile():
     if 'username' not in session:
         return redirect('/index')
+    if session['username'] != 'admin':
+        return redirect('/index')
     query = Teacher.query.filter_by(username=session['username']).first()
     full_name = query.full_name
     return render_template('profile.html', session=session, full_name=full_name)
@@ -166,6 +168,27 @@ def logout():
     session.pop('username', 0)
     session.pop('user_id', 0)
     return redirect('/index')
+
+
+@app.route('/admin')
+def admin():
+    if 'username' not in session:
+        return redirect('/index')
+    if session['username'] != 'admin':
+        return redirect('/index')
+    return render_template('admin.html', session=session, users=Teacher.query.all())
+
+
+@app.route('/accept/<int:user_id>')
+def accept(user_id):
+    if 'username' not in session:
+        return redirect('/index')
+    if session['username'] != 'admin':
+        return redirect('/index')
+    query = Teacher.query.filter_by(id=user_id).first()
+    query.accepted = not query.accepted
+    db.session.commit()
+    return redirect('/admin')
 
 
 if __name__ == '__main__':

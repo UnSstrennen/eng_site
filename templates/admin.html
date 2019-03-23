@@ -2,9 +2,60 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/TEACHERS.css') }}" >
     <title>Админочка :3</title>
 </head>
-<body>
+<body style='background-color:#d9d6e7;'>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<a class="navbar-brand" href="#"><em>Кафедра иностранных языков предуниверситетского лицея при НИЯУ МИФИ 1523</em></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+ <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+ <ul class="navbar-nav">
+   <li class="nav-item">
+     <a class="nav-link" href="/index">Главная</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link" href="/teachers">Учителя <span class="sr-only">(current)</span></a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link" href="/advices">Советы</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link" href="/timetable">Расписание</a>
+   </li>
+ </ul>
+    {% if session['username'] %}
+    <div style="position: absolute; right: 100px;">
+  <img src="{{ url_for('static', filename='images/user.png') }}" width="30" height="30">
+    <a href="profile" style="color: white; text-decoration: underline; display: inline;">
+        {{ session['username'] }}</a>
+    </div>
+        <a class="btn btn-secondary" href="logout" role="button" style="position: absolute; right: 15px; display: inline;">Выйти</a>
+    {% else %}
+  <a class="btn btn-secondary" href="login" role="button"style="position: absolute; right: 15px; display: inline;">Войти</a>
+    {% endif %}
+</div>
+</nav>
 
+  <h1>Админочка :3</h1>
+  <h2>Пользователи:</h2>
+{% for user in users %}
+    <div class="alert alert-secondary" role="alert">
+        <h3>{{user.full_name}}</h3>
+        <div>id = {{user.id}}</div>
+        {% if user.username != 'admin' %}
+            {% if user.accepted %}
+            <p style="color: green">Подтверждён</p>
+            <a href="accept/{{user.id}}">Отменить подтверждение</a>
+            {% else %}
+            <p style="color: red">Не подтверждён</p>
+            <a href="accept/{{user.id}}">Подтвердить пользователя</a>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endfor %}
 </body>
 </html>
