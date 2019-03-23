@@ -3,6 +3,19 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 from configparser import ConfigParser
+from transliterate import translit
+
+
+def to_en(word):
+    new_word = translit(word, 'ru', reversed=True)
+    return new_word
+
+
+def to_ru(word, capitalize=False):
+    new_word = translit(word, 'ru')
+    if capitalize:
+        new_word = new_word.capitalize()
+    return new_word
 
 
 config = ConfigParser()
