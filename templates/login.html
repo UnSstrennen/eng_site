@@ -6,29 +6,38 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body style='background-color:#d9d6e7;'>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><em>Кафедра иностранных языков предуниверситетского лицея при НИЯУ МИФИ 1523</em></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-     <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-     <ul class="navbar-nav">
-       <li class="nav-item">
-         <a class="nav-link" href="/index">Главная</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="/teachers">Учителя <span class="sr-only">(current)</span></a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="/advices">Советы</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="/timetable">Расписание</a>
-       </li>
-     </ul>
-        <a class="btn btn-secondary" href="login" role="button"style="position: absolute; right: 15px;">Войти</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<a class="navbar-brand" href="#"><em>Кафедра иностранных языков предуниверситетского лицея при НИЯУ МИФИ 1523</em></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+ <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+ <ul class="navbar-nav">
+   <li class="nav-item active">
+     <a class="nav-link" href="/index">Главная</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link" href="/teachers">Учителя <span class="sr-only">(current)</span></a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link" href="/advices">Советы</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link" href="/timetable">Расписание</a>
+   </li>
+ </ul>
+    {% if session['username'] %}
+    <div style="position: absolute; right: 100px;">
+  <img src="{{ url_for('static', filename='images/user.png') }}" width="30" height="30">
+    <a href="profile" style="color: white; text-decoration: underline; display: inline;">
+        {{ session['username'] }}</a>
     </div>
-    </nav>
+        <a class="btn btn-secondary" href="logout" role="button" style="position: absolute; right: 15px; display: inline;">Выйти</a>
+    {% else %}
+  <a class="btn btn-secondary" href="login" role="button"style="position: absolute; right: 15px; display: inline;">Войти</a>
+    {% endif %}
+</div>
+</nav>
 
     <style>
         #form_body {

@@ -65,7 +65,7 @@ class LoginForm(FlaskForm):
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', session=session)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -85,42 +85,49 @@ def login():
             session['username'] = query.username
             session['user_id'] = query.id
             return redirect('/index')
-    return render_template('login.html', form=form, error=False)
+    return render_template('login.html', form=form, error=False, session=session)
 
 
 @app.route('/idioms')
 def idioms():
-    return render_template('idioms.html')
+    return render_template('idioms.html', session=session)
 
 
 @app.route('/advices')
 def advices():
-    return render_template('advices.html')
+    return render_template('advices.html', session=session)
 
 
 @app.route('/irregularverbs')
 def irregularverbs():
-    return render_template('irregularverbs.html')
+    return render_template('irregularverbs.html', session=session)
 
 
 @app.route('/motivation')
 def motivation():
-    return render_template('motivation.html')
+    return render_template('motivation.html', session=session)
 
 
 @app.route('/popularwords')
 def popularwords():
-    return render_template('popularwords.html')
+    return render_template('popularwords.html', session=session)
 
 
 @app.route('/teachers')
 def teachers():
-    return render_template('teachers.html')
+    return render_template('teachers.html', session=session)
 
 
 @app.route('/timetable')
 def timetable():
-    return render_template('timetable.html')
+    return render_template('timetable.html', session=session)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', 0)
+    session.pop('user_id', 0)
+    return redirect('/index')
 
 
 if __name__ == '__main__':
