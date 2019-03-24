@@ -278,13 +278,20 @@ def accept(user_id):
     return redirect('/admin')
 
 
-@app.route('/aaa', methods=['GET', 'POST'])
-def aaa():
-    if request.method == 'POST':
-        print(request.args.get('name'))
-    else:
-        return '''<input type="text" name="name" size="40"><input type="submit" value="Отправить" 
-            onclick="location.replace('http://ya.ru')">'''
+@app.route('/delete/<int:user_id>')
+def delete(user_id):
+    if 'username' not in session:
+        return redirect('/index')
+    if session['username'] != 'admin':
+        return redirect('/index')
+    query = Teacher.query.filter_by(id=user_id).first()
+    db.session.delete(query)
+    db.session.commit()
+
+    query = Timetable.query.filter_by(user_id=user_id).all()
+    [db.session.delete(row) for row in query]
+    db.session.commit()
+    return redirect('/admin')
 
 
 if __name__ == '__main__':
