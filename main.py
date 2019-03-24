@@ -154,7 +154,34 @@ def teachers():
 
 @app.route('/timetable')
 def timetable():
-    return render_template('timetable.html', session=session)
+    full_dict = dict()
+    for teacher in Teacher.query.all():
+        if not teacher.accepted:
+            continue
+        # prepare dict
+        teacher_dict = dict()
+        for day in WEEK_DAYS:
+            teacher_dict[day] = dict
+        # add data to dict
+        for day in WEEK_DAYS:
+            day_dict = dict()
+            for number in range(1, 5):
+                query = Timetable.query.filter_by(day=day, number=number, user_id=teacher.id).first()
+                if query is None:
+                    continue
+                print(query)
+                x = query.red_week
+                y = query.green_week
+                if not x:
+                    x = '---'
+                if not y:
+                    y = '---'
+                day_dict[number] = {'red_week': x, 'green_week': y}
+            teacher_dict[day] = day_dict
+        full_dict[teacher.full_name] = teacher_dict
+    del full_dict['admin adminovich adminov']
+    print(full_dict)
+    return render_template('timetable.html', session=session, teacher_data=full_dict, week_days=WEEK_DAYS, bool=bool)
 
 
 @app.route('/register', methods=['GET', 'POST'])
