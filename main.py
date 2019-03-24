@@ -174,28 +174,51 @@ def register():
     return render_template('register.html', session=session, form=form, error=False)
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['get', 'post'])
 def profile():
-    if 'username' not in session:
-        return redirect('/index')
-    if session['username'] == 'admin':
-        return redirect('/admin')
-    query = Teacher.query.filter_by(username=session['username']).first()
-    full_name = query.full_name
-    # prepare dict
-    teacher_dict = dict()
-    for day in WEEK_DAYS:
-        teacher_dict[day] = dict
-    # add data to dict
-    for day in WEEK_DAYS:
-        day_dict = dict()
-        for number in range(1, 5):
-            query = Timetable.query.filter_by(day=day, number=number, full_name=full_name).first()
-            day_dict[number] = {'red_week': query.red_week, 'green_week': query.green_week}
-        teacher_dict[day] = day_dict
-    print(teacher_dict['Понедельник'][1])
-    return render_template('profile.html', session=session, full_name=full_name,
-                           week_days=WEEK_DAYS, data=teacher_dict)
+    if request.method == 'GET':
+        if 'username' not in session:
+            return redirect('/index')
+        if session['username'] == 'admin':
+            return redirect('/admin')
+        query = Teacher.query.filter_by(username=session['username']).first()
+        full_name = query.full_name
+        # prepare dict
+        teacher_dict = dict()
+        for day in WEEK_DAYS:
+            teacher_dict[day] = dict
+        # add data to dict
+        for day in WEEK_DAYS:
+            day_dict = dict()
+            for number in range(1, 5):
+                query = Timetable.query.filter_by(day=day, number=number, full_name=full_name).first()
+                day_dict[number] = {'red_week': query.red_week, 'green_week': query.green_week}
+            teacher_dict[day] = day_dict
+        print(teacher_dict['Понедельник'][1])
+        return render_template('profile.html', session=session, full_name=full_name,
+                               week_days=WEEK_DAYS, data=teacher_dict)
+    else:
+        for day in WEEK_DAYS:
+            for number in range(1, 5):
+                for week in ['red_week', 'green_week']:
+                    changed = False
+                    name = '-'.join([str(session['user_id']), day, str(number), week])
+                    data = request.form[name]
+                    query = Timetable.query.filter_by(user_id=session['user_id'],
+                                                      day=day,
+                                                      number=number).first()
+                    if query is None:
+                        return 'ERROR!'
+                    if week == 'red_week' and query.red_week != data:
+                        query.red_week = data
+                        changed = True
+                    elif week == 'green_week' and query.green_week != data:
+                        query.green_week = data
+                        changed = True
+                    if changed:
+                        db.session.commit()
+        return redirect('/profile')
+
 
 
 @app.route('/logout')

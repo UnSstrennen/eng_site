@@ -55,6 +55,7 @@
   </div>
 
     <!-- Table generation -->
+  <form method="post">
   <div class="row">
     <table class="table" style="width: 80%; text-align: center; margin: auto;">
   <thead class="bg-secondary">
@@ -73,23 +74,19 @@
         {% for number in range(1, 5) %}
         <td>
             <!-- red_week generation -->
-            {% if data[day][number]['red_week'] %}
-            {{ data[day][number]['red_week'] }}
-            {% else %}
-            <strong>---</strong>
-            {% endif %}
+            <input type="text" value="{{ data[day][number]['red_week'] }}" name="{{ session['user_id'] }}-{{ day }}-{{ number }}-red_week" size="3">
             /
             <!-- green_week generation -->
-            {% if data[day][number]['green_week'] %}
-            {{ data[day][number]['green_week'] }}
-            {% else %}
-            <strong>---</strong>
-            {% endif %}
+            <input type="text" value="{{ data[day][number]['green_week'] }}" name="{{ session['user_id'] }}-{{ day }}-{{ number }}-green_week" size="3">
         {% endfor %}
     </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
+      <!-- button for submit -->
+    <input class="btn btn-secondary" type="submit" value="Сохранить изменения" style="   display:block;
+   position: relative; margin: 15px auto;">
+    </form>
 </body>
 </html>
