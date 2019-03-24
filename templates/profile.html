@@ -42,14 +42,54 @@
 
   <style>
       #name {
-          padding: 50px;
-          position: fixed; left: 50%;
+          position: center; left: 50%;
           -webkit-transform: translate(-50%, 0%);
           -ms-transform: translate(-50%, 0%);
           transform: translate(-50%, 0%);
           font-style: italic;
       }
   </style>
-  <h1 id="name">{{ full_name }}</h1>
+  <p> "Красная неделя"/"Зеленая неделя"</p>
+    <div class="text-center">
+    <h2 class='my'><em>{{ full_name }}</em></h2>
+  </div>
+
+    <!-- Table generation -->
+  <div class="row">
+    <table class="table" style="width: 80%; text-align: center; margin: auto;">
+  <thead class="bg-secondary">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">8.45-10.30</th>
+      <th scope="col">10.40-12.20</th>
+      <th scope="col">13.00-14.40</th>
+      <th scope="col">14.50-16.30</th>
+    </tr>
+  </thead>
+        {% for day in week_days %}
+    <tr>
+        <!-- row generation -->
+      <th scope="row">{{ day }}</th>
+        {% for number in range(1, 5) %}
+        <td>
+            <!-- red_week generation -->
+            {% if data[day][number]['red_week'] %}
+            {{ data[day][number]['red_week'] }}
+            {% else %}
+            <strong>---</strong>
+            {% endif %}
+            /
+            <!-- green_week generation -->
+            {% if data[day][number]['green_week'] %}
+            {{ data[day][number]['green_week'] }}
+            {% else %}
+            <strong>---</strong>
+            {% endif %}
+        {% endfor %}
+    </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

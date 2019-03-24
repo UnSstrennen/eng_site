@@ -34,8 +34,8 @@ def make_empty_timetable(user):
             row = Timetable(day=day,
                             number=number,
                             full_name=user.full_name,
-                            red_week=None,
-                            green_week=None,
+                            red_week='',
+                            green_week='',
                             user_id=user.id)
             db.session.add(row)
     db.session.commit()
@@ -70,12 +70,13 @@ class Timetable(db.Model):
     day = db.Column(db.String(30), unique=False, nullable=False)
     number = db.Column(db.Integer, unique=False, nullable=False)
     full_name = db.Column(db.String(80), unique=False, nullable=False)
-    red_week = db.Column(db.String(30), unique=False, nullable=True)
-    green_week = db.Column(db.String(30), unique=False, nullable=True)
+    red_week = db.Column(db.String(30), unique=False, nullable=False)
+    green_week = db.Column(db.String(30), unique=False, nullable=False)
     user_id = db.Column(db.Integer, unique=False, nullable=False)
 
     def __repr__(self):
-        return '<Timetable object>'
+        return '<Timetable {}/{} {}(id={}) {}/{}>'.format(
+            self.day, self.number, self.full_name, self.user_id, self.red_week, self.green_week)
 
 
 db.create_all()
@@ -181,7 +182,20 @@ def profile():
         return redirect('/admin')
     query = Teacher.query.filter_by(username=session['username']).first()
     full_name = query.full_name
-    return render_template('profile.html', session=session, full_name=full_name)
+    # prepare dict
+    teacher_dict = dict()
+    for day in WEEK_DAYS:
+        teacher_dict[day] = dict
+    # add data to dict
+    for day in WEEK_DAYS:
+        day_dict = dict()
+        for number in range(1, 5):
+            query = Timetable.query.filter_by(day=day, number=number, full_name=full_name).first()
+            day_dict[number] = {'red_week': query.red_week, 'green_week': query.green_week}
+        teacher_dict[day] = day_dict
+    print(teacher_dict['Понедельник'][1])
+    return render_template('profile.html', session=session, full_name=full_name,
+                           week_days=WEEK_DAYS, data=teacher_dict)
 
 
 @app.route('/logout')
