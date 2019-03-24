@@ -1,10 +1,13 @@
-from flask import Flask, render_template, session, redirect
+from flask import Flask, render_template, session, redirect, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 from configparser import ConfigParser
 from transliterate import translit
 from flask_sqlalchemy import SQLAlchemy
+
+
+WEEK_DAYS = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
 
 
 def to_en(word):
@@ -17,6 +20,26 @@ def to_ru(word, capitalize=False):
     if capitalize:
         new_word = new_word.capitalize()
     return new_word
+
+
+def make_empty_timetable(user):
+    """ creates an empty timetable for teacher """
+    # check for existing
+    query = Timetable.query.filter_by(user_id=user.id).first()
+    if query is not None:
+        return
+    # if not exists
+    for day in WEEK_DAYS:
+        for number in range(1, 5):
+            row = Timetable(day=day,
+                            number=number,
+                            full_name=user.full_name,
+                            red_week=None,
+                            green_week=None,
+                            user_id=user.id)
+            db.session.add(row)
+    db.session.commit()
+    return
 
 
 config = ConfigParser()
@@ -44,10 +67,11 @@ class Teacher(db.Model):
 
 class Timetable(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    day = db.Column(db.String(30), unique=True, nullable=False)
+    day = db.Column(db.String(30), unique=False, nullable=False)
+    number = db.Column(db.Integer, unique=False, nullable=False)
     full_name = db.Column(db.String(80), unique=False, nullable=False)
-    red_week = db.Column(db.String(30), unique=False, nullable=False)
-    green_week = db.Column(db.String(30), unique=False, nullable=False)
+    red_week = db.Column(db.String(30), unique=False, nullable=True)
+    green_week = db.Column(db.String(30), unique=False, nullable=True)
     user_id = db.Column(db.Integer, unique=False, nullable=False)
 
     def __repr__(self):
@@ -145,9 +169,6 @@ def register():
                           )
         db.session.add(teacher)
         db.session.commit()
-        WEEK_DAYS = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']
-        for week_day in WEEK_DAYS:
-            pass
         return redirect('login')
     return render_template('register.html', session=session, form=form, error=False)
 
@@ -187,8 +208,19 @@ def accept(user_id):
         return redirect('/index')
     query = Teacher.query.filter_by(id=user_id).first()
     query.accepted = not query.accepted
+    if query.accepted:
+        make_empty_timetable(query)
     db.session.commit()
     return redirect('/admin')
+
+
+@app.route('/aaa', methods=['GET', 'POST'])
+def aaa():
+    if request.method == 'POST':
+        print(request.args.get('name'))
+    else:
+        return '''<input type="text" name="name" size="40"><input type="submit" value="Отправить" 
+            onclick="location.replace('http://ya.ru')">'''
 
 
 if __name__ == '__main__':
